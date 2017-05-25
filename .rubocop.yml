@@ -1,0 +1,18 @@
+Metrics/LineLength:
+  Max: 200
+
+Documentation:
+    Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.2
+  Exclude:
+    - 'Gemfile'
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'spec/fixtures/**/*'
+    - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
+    - 'vendor/**/*'
+    - 'tmp/**/*'
