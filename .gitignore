@@ -1,0 +1,5 @@
+/db/*.sqlite3
+/log/*
+/.bundle/
+!/log/.keep
+!/tmp/.keep
