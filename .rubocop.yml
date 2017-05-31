@@ -14,6 +14,7 @@ AllCops:
     - 'config/**/*'
     - 'db/**/*'
     - 'spec/fixtures/**/*'
+    - 'spec/models/repo_data_spec.rb' # main describe block too big :(
     - 'spec/spec_helper.rb'
     - 'spec/rails_helper.rb'
     - 'vendor/**/*'
