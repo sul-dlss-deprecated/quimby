@@ -1,0 +1,18 @@
+{
+  "type": "file",
+  "encoding": "base64",
+  "size": 5362,
+  "name": "Gemfile",
+  "path": "Gemfile",
+  "content": "encoded content ...",
+  "sha": "3d21ec53a331a6f037a91c368710b99387d012c1",
+  "url": "https://api.github.com/repos/octokit/octokit.rb/contents/Gemfile",
+  "git_url": "https://api.github.com/repos/octokit/octokit.rb/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
+  "html_url": "https://github.com/octokit/octokit.rb/blob/master/Gemfile",
+  "download_url": "https://raw.githubusercontent.com/octokit/octokit.rb/master/Gemfile",
+  "_links": {
+    "git": "https://api.github.com/repos/octokit/octokit.rb/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
+    "self": "https://api.github.com/repos/octokit/octokit.rb/contents/Gemfile",
+    "html": "https://github.com/octokit/octokit.rb/blob/master/Gemfile"
+  }
+}
