@@ -22,9 +22,31 @@ class RepoData
     end
   end
 
+  def load_data_fields_by_path(path, field_name)
+    Repository.find_each do |r|
+      response = repo_file_exists? r.name, path
+      r.update(field_name => response)
+    end
+  end
+
   private
 
   def all_repos
     @repos ||= github_client.repos.all
+  end
+
+  def repo_contents
+    @repo_contents ||= github_client.repos.contents
+  end
+
+  def get_repo_contents(repo_name, path)
+    repo_contents.get repo: repo_name, path: path.to_s
+  rescue Github::Error::NotFound
+    NullResponse.new
+  end
+
+  def repo_file_exists?(repo_name, path)
+    return true if get_repo_contents(repo_name, path).present?
+    false
   end
 end
