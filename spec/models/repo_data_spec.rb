@@ -30,7 +30,7 @@ RSpec.describe RepoData do
     end
 
     it 'only creates unique objects on name and organization' do
-      Repository.create(name: 'Hello-World', organization: 'octocat')
+      create(:repository)
       expect { basic_repo_data.load_basic_repo_data }.to change { Repository.all.count }.by 1
     end
   end
