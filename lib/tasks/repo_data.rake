@@ -10,5 +10,6 @@ namespace :load_repo_data do
     github_client.load_data_fields_by_path '.travis.yml', :has_travis
     github_client.load_data_fields_by_path 'config/initializers/okcomputer.rb', :has_okcomputer
     github_client.load_data_fields_by_path 'config/initializers/is_it_working.rb', :has_is_it_working
+    github_client.load_data_fields_by_file_content 'Gemfile', 'honeybadger', :has_honeybadger
   end
 end
