@@ -71,4 +71,41 @@ RSpec.describe RepoData do
       end
     end
   end
+
+  describe '#load_data_fields_by_file_content' do
+    describe 'with a valid reponse' do
+      before do
+        response = file_fixture('repo_contents_gemfile').read
+        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
+      end
+
+      it 'sets field name to be true' do
+        repo = create(:repository)
+        expect do
+          basic_repo_data.load_data_fields_by_file_content('Gemfile', 'rails', :is_rails)
+          repo.reload
+        end.to change { repo.is_rails }.to be true
+      end
+
+      it 'loads and updates all Repository objects' do
+        create_list(:repository, 10)
+        basic_repo_data.load_data_fields_by_file_content('Gemfile', 'rails', :is_rails)
+        expect(Repository.all.all?(&:is_rails)).to be true
+      end
+    end
+
+    describe 'with an exception thrown' do
+      before do
+        stub_request(:get, /api.github.com/).to_return(status: 404)
+      end
+
+      it 'sets field name to false' do
+        repo = create(:repository)
+        expect do
+          basic_repo_data.load_data_fields_by_file_content('Gemfile', 'rails', :is_rails)
+          repo.reload
+        end.to change { repo.is_rails }.to be false
+      end
+    end
+  end
 end

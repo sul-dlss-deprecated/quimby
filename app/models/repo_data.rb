@@ -29,6 +29,13 @@ class RepoData
     end
   end
 
+  def load_data_fields_by_file_content(path, search_string, field_name)
+    Repository.find_each do |r|
+      response = repo_file_contains? r.name, path, search_string
+      r.update(field_name => response)
+    end
+  end
+
   private
 
   def all_repos
@@ -47,6 +54,16 @@ class RepoData
 
   def repo_file_exists?(repo_name, path)
     return true if get_repo_contents(repo_name, path).present?
+    false
+  end
+
+  def decode_file_contents(content)
+    Base64.decode64(content)
+  end
+
+  def repo_file_contains?(repo_name, path, search_string)
+    response = get_repo_contents repo_name, path
+    return true if decode_file_contents(response.content).include?(search_string)
     false
   end
 end
