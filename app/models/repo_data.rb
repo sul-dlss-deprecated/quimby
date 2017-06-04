@@ -1,69 +1,61 @@
 # frozen_string_literal: true
 
-require 'github_api'
-
 class RepoData
-  attr_reader :github_client
+  attr_reader :client, :org
 
   def initialize(org)
-    @github_client = Github.new do |c|
-      c.auto_pagination = true
-      c.oauth_token = Settings.GITHUB_OAUTH_TOKEN
-      c.user = org
-    end
+    @client = GithubClient.new(org)
+    @org = org
   end
 
   def load_basic_repo_data
-    all_repos.map do |r|
-      Repository.find_or_create_by(name: r.name, organization: r.owner.login) do |repo|
+    client.all_repos.map do |r|
+      Repository.find_or_create_by(name: r.name, organization: org) do |repo|
         repo.url = r.html_url
         repo.language = r.language
       end
     end
   end
 
-  def load_data_fields_by_path(path, field_name)
-    Repository.find_each do |r|
-      response = repo_file_exists? r.name, path
-      r.update(field_name => response)
+  def load_capistrano_data
+    Repository.where(organization: org).find_each do |repo|
+      response = client.repo_file_exists? repo.name, 'Capfile'
+      repo.update(has_capistrano: response)
     end
   end
 
-  def load_data_fields_by_file_content(path, search_string, field_name)
-    Repository.find_each do |r|
-      response = repo_file_contains? r.name, path, search_string
-      r.update(field_name => response)
+  def load_rspec_data
+    Repository.where(organization: org).find_each do |repo|
+      response = client.repo_file_exists? repo.name, '.rspec'
+      repo.update(has_rspec: response)
     end
   end
 
-  private
-
-  def all_repos
-    @repos ||= github_client.repos.all
+  def load_travis_data
+    Repository.where(organization: org).find_each do |repo|
+      response = client.repo_file_exists? repo.name, '.travis.yml'
+      repo.update(has_travis: response)
+    end
   end
 
-  def repo_contents
-    @repo_contents ||= github_client.repos.contents
+  def load_okcomputer_data
+    Repository.where(organization: org).find_each do |repo|
+      response = client.repo_file_exists? repo.name, 'config/initializers/okcomputer.rb'
+      repo.update(has_okcomputer: response)
+    end
   end
 
-  def get_repo_contents(repo_name, path)
-    repo_contents.get repo: repo_name, path: path.to_s
-  rescue Github::Error::NotFound
-    NullResponse.new
+  def load_is_it_working_data
+    Repository.where(organization: org).find_each do |repo|
+      response = client.repo_file_exists? repo.name, 'config/initializers/is_it_working.rb'
+      repo.update(has_is_it_working: response)
+    end
   end
 
-  def repo_file_exists?(repo_name, path)
-    return true if get_repo_contents(repo_name, path).present?
-    false
-  end
-
-  def decode_file_contents(content)
-    Base64.decode64(content)
-  end
-
-  def repo_file_contains?(repo_name, path, search_string)
-    response = get_repo_contents repo_name, path
-    return true if decode_file_contents(response.content).include?(search_string)
-    false
+  def load_honeybadger_data
+    Repository.where(organization: org).find_each do |repo|
+      response = client.repo_file_contains? repo.name, 'Gemfile', 'honeybadger'
+      repo.update(has_honeybadger: response)
+    end
   end
 end
