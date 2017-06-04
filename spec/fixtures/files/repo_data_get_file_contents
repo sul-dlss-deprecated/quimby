@@ -1,0 +1,17 @@
+{
+  "type": "file",
+  "encoding": "base64",
+  "size": 5362,
+  "name": "Gemfile",
+  "path": "Gemfile",
+  "content": "c291cmNlICdodHRwczovL3J1YnlnZW1zLm9yZycKCmdlbSAncmFpbHMnLCAn\nfj4gNS4xLjAnCgpnZW0gJ2ZhcmFkYXknCgpnZW0gJ25va29naXJpJywgJz49\nIDEuNy4xJwoKZ2VtICdkb3ItcmlnaHRzLWF1dGgnLCAnPj0gMS4zLjAnICMg\nbmVlZCBkb3dubG9hZGFibGUgbWV0aG9kcwoKZ2VtICdjb25maWcnCgpnZW0g\nJ3RoZXJ1YnlyYWNlcicKCmdlbSAnaXNvODYwMScgIyB0byBwYXJzZSBkdXJh\ndGlvbnMsIHNpbmNlIEFjdGl2ZVN1cHBvcnQ6OkR1cmF0aW9uIGRvZXNuJ3Qg\nZ2V0IGEgcGFyc2UgbWV0aG9kIHRpbGwgcmFpbHMgNQoKZ3JvdXAgOmRldmVs\nb3BtZW50LCA6dGVzdCBkbwogIGdlbSAncnNwZWMtcmFpbHMnLCAnfj4gMy4w\nJwogIGdlbSAnY2FweWJhcmEnCiAgZ2VtICdwb2x0ZXJnZWlzdCcKICBnZW0g\nJ2hpZ2hfdm9sdGFnZScKCiAgIyBDb3ZlcmFsbHMgZ2VtIGZvciBjb2RlIGNv\ndmVyYWdlIHJlcG9ydGluZwogIGdlbSAnY292ZXJhbGxzJywgcmVxdWlyZTog\nZmFsc2UKCiAgIyBUZWFzcG9vbi1qYXNtaW5lIGlzIGEgd3JhcHBlciBmb3Ig\ndGhlIEphc21pbmUgamF2YXNjcmlwdCB0ZXN0aW5nIGxpYnJhcnkKICBnZW0g\nJ3RlYXNwb29uLWphc21pbmUnCgogICMgQWxsb3dzIGpRdWVyeSBpbnRlZ3Jh\ndGlvbiBpbnRvIHRoZSBKYXNtaW5lIGphdmFzY3JpcHQgdGVzdGluZyBmcmFt\nZXdvcmsKICBnZW0gJ2phc21pbmUtanF1ZXJ5LXJhaWxzJwoKICAjIEhhdmUg\nalF1ZXJ5IGxvY2FsIGZvciB0ZXN0aW5nCiAgZ2VtICdqcXVlcnktcmFpbHMn\nCgogICMgTmVlZGVkIGZvciBkZXBsb3lpbmcgdG8gZGV2L3Rlc3QKICBnZW0g\nJ2NvZmZlZS1yYWlscycKCiAgIyBMaW50aW5nL1N0eWxlZ3VpZGUgRW5mb3Jj\nZW1lbnQKICBnZW0gJ3J1Ym9jb3AnCgogICMgZ3VhcmQtcnNwZWMgZm9yIGF1\ndG8tcnVubmluZyB0ZXN0cyB3aGVuIHJlbGV2YW50IGZpbGVzIGFyZSBjaGFu\nZ2VkCiAgZ2VtICdndWFyZC1yc3BlYycsIHJlcXVpcmU6IGZhbHNlCgogICMg\nZm9yIGRlYnVnZ2luZwogIGdlbSAncHJ5LWJ5ZWJ1ZycKZW5kCgpnZW0gJ2Nv\nZGVjbGltYXRlLXRlc3QtcmVwb3J0ZXInLCBncm91cDogOnRlc3QsIHJlcXVp\ncmU6IGZhbHNlCgpncm91cCA6ZGVwbG95bWVudCBkbwogIGdlbSAnY2FwaXN0\ncmFubycsICd+PiAzLjAnCiAgZ2VtICdjYXBpc3RyYW5vLWJ1bmRsZXInCiAg\nZ2VtICdjYXBpc3RyYW5vLXJhaWxzJwogIGdlbSAnY2FwaXN0cmFuby1wYXNz\nZW5nZXInCiAgZ2VtICdjYXBpc3RyYW5vLXNoYXJlZF9jb25maWdzJwogIGdl\nbSAnZGxzcy1jYXBpc3RyYW5vJwplbmQKCiMgVXNlIGhvbmV5YmFkZ2VyIGZv\nciBleGNlcHRpb24gaGFuZGxpbmcKZ2VtICdob25leWJhZGdlcicKCmdlbSAn\ndWdsaWZpZXInCgpnZW0gJ3Nhc3MtcmFpbHMnCgpnZW0gJ2ZpbGVzaXplJwoK\nZ2VtICdib3dlci1yYWlscycKCmdlbSAnbGVhZmxldC1yYWlscycKCmdlbSAn\nc3VsX3N0eWxlcycsICd+PjAuNicKCiMgVXNlIG9rY29tcHV0ZXIgdG8gbW9u\naXRvciB0aGUgYXBwbGljYXRpb24KZ2VtICdva2NvbXB1dGVyJwoKZ2VtICdy\nYWtlJywgJ34+MTEnCg==\n",
+  "url": "https://api.github.com/repos/octokit/octokit.rb/contents/Gemfile",
+  "git_url": "https://api.github.com/repos/octokit/octokit.rb/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
+  "html_url": "https://github.com/octokit/octokit.rb/blob/master/Gemfile",
+  "download_url": "https://raw.githubusercontent.com/octokit/octokit.rb/master/Gemfile",
+  "_links": {
+    "git": "https://api.github.com/repos/octokit/octokit.rb/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
+    "self": "https://api.github.com/repos/octokit/octokit.rb/contents/Gemfile",
+    "html": "https://github.com/octokit/octokit.rb/blob/master/Gemfile"
+  }
+}
