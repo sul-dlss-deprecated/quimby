@@ -3,15 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe RepoData do
-  subject(:basic_repo_data) { described_class.new('test-org') }
+  subject(:repo_data) { described_class.new('octocat') }
 
   describe '#initialize' do
-    it 'creates an github_client instance' do
-      expect(basic_repo_data.github_client).to be_an Github::Client
-    end
-
-    it 'sets the clients user to the passed org' do
-      expect(basic_repo_data.github_client.user).to eq 'test-org'
+    it 'creates an GithubClient instance' do
+      expect(repo_data.client).to be_an GithubClient
     end
   end
 
@@ -22,7 +18,7 @@ RSpec.describe RepoData do
     end
 
     it 'creates objects from api response' do
-      repo = basic_repo_data.load_basic_repo_data.first
+      repo = repo_data.load_basic_repo_data.first
       expect(repo.name).to eq 'Hello-World'
       expect(repo.organization).to eq 'octocat'
       expect(repo.url).to eq 'https://github.com/octocat/Hello-World'
@@ -31,80 +27,244 @@ RSpec.describe RepoData do
 
     it 'only creates unique objects on name and organization' do
       create(:repository)
-      expect { basic_repo_data.load_basic_repo_data }.to change { Repository.all.count }.by 1
+      expect { repo_data.load_basic_repo_data }.to change { Repository.all.count }.by 1
     end
   end
 
-  describe '#load_data_fields_by_path' do
+  describe '#load_capistrano_data' do
+    describe 'with valid response' do
+      before do
+        response = file_fixture('repo_data_get_file').read
+        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
+      end
+
+      it 'sets capistrano field to true' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_capistrano_data
+          repo.reload
+        end.to change { repo.has_capistrano }.to be true
+      end
+    end
+
+    describe 'with invalid response' do
+      before do
+        stub_request(:any, /api.github.com/).to_return(status: 404)
+      end
+
+      it 'sets capistrano field to false' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_capistrano_data
+          repo.reload
+        end.to change { repo.has_capistrano }.to be false
+      end
+    end
+  end
+
+  describe '#load_rspec_data' do
+    describe 'with valid response' do
+      before do
+        response = file_fixture('repo_data_get_file').read
+        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
+      end
+
+      it 'sets rspec field to true' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_rspec_data
+          repo.reload
+        end.to change { repo.has_rspec }.to be true
+      end
+    end
+
+    describe 'with invalid response' do
+      before do
+        stub_request(:any, /api.github.com/).to_return(status: 404)
+      end
+
+      it 'sets rspec field to false' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_rspec_data
+          repo.reload
+        end.to change { repo.has_rspec }.to be false
+      end
+    end
+  end
+
+  describe '#load_travis_data' do
+    describe 'with valid response' do
+      before do
+        response = file_fixture('repo_data_get_file').read
+        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
+      end
+
+      it 'sets travis field to true' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_travis_data
+          repo.reload
+        end.to change { repo.has_travis }.to be true
+      end
+    end
+
+    describe 'with invalid response' do
+      before do
+        stub_request(:any, /api.github.com/).to_return(status: 404)
+      end
+
+      it 'sets travis field to false' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_travis_data
+          repo.reload
+        end.to change { repo.has_travis }.to be false
+      end
+    end
+  end
+
+  describe '#load_okcomputer_data' do
+    describe 'with valid response' do
+      before do
+        response = file_fixture('repo_data_get_file').read
+        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
+      end
+
+      it 'sets okcomputer field to true' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_okcomputer_data
+          repo.reload
+        end.to change { repo.has_okcomputer }.to be true
+      end
+    end
+
+    describe 'with invalid response' do
+      before do
+        stub_request(:any, /api.github.com/).to_return(status: 404)
+      end
+
+      it 'sets okcomputer field to false' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_okcomputer_data
+          repo.reload
+        end.to change { repo.has_okcomputer }.to be false
+      end
+    end
+  end
+
+  describe '#load_is_it_working_data' do
+    describe 'with valid response' do
+      before do
+        response = file_fixture('repo_data_get_file').read
+        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
+      end
+
+      it 'sets is_it_working field to true' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_is_it_working_data
+          repo.reload
+        end.to change { repo.has_is_it_working }.to be true
+      end
+    end
+
+    describe 'with invalid response' do
+      before do
+        stub_request(:any, /api.github.com/).to_return(status: 404)
+      end
+
+      it 'sets is_it_working field to false' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_is_it_working_data
+          repo.reload
+        end.to change { repo.has_is_it_working }.to be false
+      end
+    end
+  end
+
+  describe '#load_honeybadger_data' do
     describe 'with a valid reponse' do
       before do
-        response = file_fixture('repo_contents_gemfile').read
+        response = file_fixture('repo_data_get_file_contents').read
         stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
       end
 
       it 'sets field name to be true' do
         repo = create(:repository)
         expect do
-          basic_repo_data.load_data_fields_by_path('Gemfile', :is_rails)
+          repo_data.load_honeybadger_data
           repo.reload
-        end.to change { repo.is_rails }.to be true
-      end
-
-      it 'loads and updates all Repository objects' do
-        create_list(:repository, 10)
-        basic_repo_data.load_data_fields_by_path('Gemfile', :is_rails)
-        expect(Repository.all.all?(&:is_rails)).to be true
+        end.to change { repo.has_honeybadger }.to be true
       end
     end
 
     describe 'with an exception thrown' do
       before do
-        stub_request(:get, /api.github.com/).to_return(status: 404)
+        stub_request(:any, /api.github.com/).to_return(status: 404)
       end
 
       it 'sets field name to false' do
         repo = create(:repository)
         expect do
-          basic_repo_data.load_data_fields_by_path('Otherfile', :is_rails)
+          repo_data.load_honeybadger_data
           repo.reload
-        end.to change { repo.is_rails }.to be false
+        end.to change { repo.has_honeybadger }.to be false
       end
     end
   end
 
-  describe '#load_data_fields_by_file_content' do
-    describe 'with a valid reponse' do
+  describe 'each load_xx_data method should change all records' do
+    describe 'based on repo_file_exists?' do
       before do
-        response = file_fixture('repo_contents_gemfile').read
+        response = file_fixture('repo_data_get_file').read
         stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
       end
 
-      it 'sets field name to be true' do
-        repo = create(:repository)
-        expect do
-          basic_repo_data.load_data_fields_by_file_content('Gemfile', 'rails', :is_rails)
-          repo.reload
-        end.to change { repo.is_rails }.to be true
+      it 'for load_capistrano_data' do
+        create_list(:repository, 10)
+        repo_data.load_capistrano_data
+        expect(Repository.all.all?(&:has_capistrano)).to be true
       end
 
-      it 'loads and updates all Repository objects' do
+      it 'for load_rspec_data' do
         create_list(:repository, 10)
-        basic_repo_data.load_data_fields_by_file_content('Gemfile', 'rails', :is_rails)
-        expect(Repository.all.all?(&:is_rails)).to be true
+        repo_data.load_rspec_data
+        expect(Repository.all.all?(&:has_rspec)).to be true
+      end
+
+      it 'for load_travis_data' do
+        create_list(:repository, 10)
+        repo_data.load_travis_data
+        expect(Repository.all.all?(&:has_travis)).to be true
+      end
+
+      it 'for load_okcomputer_data' do
+        create_list(:repository, 10)
+        repo_data.load_okcomputer_data
+        expect(Repository.all.all?(&:has_okcomputer)).to be true
+      end
+
+      it 'for load_is_it_working_data' do
+        create_list(:repository, 10)
+        repo_data.load_is_it_working_data
+        expect(Repository.all.all?(&:has_is_it_working)).to be true
       end
     end
 
-    describe 'with an exception thrown' do
+    describe 'based on repo_file_contains?' do
       before do
-        stub_request(:get, /api.github.com/).to_return(status: 404)
+        response = file_fixture('repo_data_get_file_contents').read
+        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
       end
 
-      it 'sets field name to false' do
-        repo = create(:repository)
-        expect do
-          basic_repo_data.load_data_fields_by_file_content('Gemfile', 'rails', :is_rails)
-          repo.reload
-        end.to change { repo.is_rails }.to be false
+      it 'for load_honeybadger_data' do
+        create_list(:repository, 10)
+        repo_data.load_honeybadger_data
+        expect(Repository.all.all?(&:has_honeybadger)).to be true
       end
     end
   end
