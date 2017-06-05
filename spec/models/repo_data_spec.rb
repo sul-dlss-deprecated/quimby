@@ -217,6 +217,68 @@ RSpec.describe RepoData do
     end
   end
 
+  describe '#load_gem_data' do
+    describe 'with a valid response' do
+      before do
+        response = file_fixture('repo_data_get_file').read
+        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
+      end
+
+      it 'sets is_gem field to true' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_gem_data
+          repo.reload
+        end.to change { repo.is_gem }.to be true
+      end
+    end
+
+    describe 'with an exception thrown' do
+      before do
+        stub_request(:any, /api.github.com/).to_return(status: 404)
+      end
+
+      it 'sets is_gem field to false' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_gem_data
+          repo.reload
+        end.to change { repo.is_gem }.to be false
+      end
+    end
+  end
+
+  describe '#load_rails_data' do
+    describe 'with a valid reponse' do
+      before do
+        response = file_fixture('repo_data_get_file_contents').read
+        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
+      end
+
+      it 'sets field name to be true' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_rails_data
+          repo.reload
+        end.to change { repo.is_rails }.to be true
+      end
+    end
+
+    describe 'with an exception thrown' do
+      before do
+        stub_request(:any, /api.github.com/).to_return(status: 404)
+      end
+
+      it 'sets field name to false' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_rails_data
+          repo.reload
+        end.to change { repo.is_rails }.to be false
+      end
+    end
+  end
+
   describe 'each load_xx_data method should change all records' do
     describe 'based on repo_file_exists?' do
       before do
@@ -253,6 +315,12 @@ RSpec.describe RepoData do
         repo_data.load_is_it_working_data
         expect(Repository.all.all?(&:has_is_it_working)).to be true
       end
+
+      it 'for load_gem_data' do
+        create_list(:repository, 10)
+        repo_data.load_gem_data
+        expect(Repository.all.all?(&:is_gem)).to be true
+      end
     end
 
     describe 'based on repo_file_contains?' do
@@ -265,6 +333,12 @@ RSpec.describe RepoData do
         create_list(:repository, 10)
         repo_data.load_honeybadger_data
         expect(Repository.all.all?(&:has_honeybadger)).to be true
+      end
+
+      it 'for load_rails_data' do
+        create_list(:repository, 10)
+        repo_data.load_rails_data
+        expect(Repository.all.all?(&:is_rails)).to be true
       end
     end
   end
