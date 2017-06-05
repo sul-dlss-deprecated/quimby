@@ -58,4 +58,18 @@ class RepoData
       repo.update(has_honeybadger: response)
     end
   end
+
+  def load_gem_data
+    Repository.where(organization: org).find_each do |repo|
+      response = client.repo_file_exists? repo.name, "#{repo.name}.gemspec"
+      repo.update(is_gem: response)
+    end
+  end
+
+  def load_rails_data
+    Repository.where(organization: org).find_each do |repo|
+      response = client.repo_file_contains? repo.name, 'Gemfile', 'rails'
+      repo.update(is_rails: response)
+    end
+  end
 end
