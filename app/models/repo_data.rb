@@ -24,13 +24,6 @@ class RepoData
     end
   end
 
-  def load_rspec_data
-    Repository.where(organization: org).find_each do |repo|
-      response = client.repo_file_exists? repo.name, '.rspec'
-      repo.update(has_rspec: response)
-    end
-  end
-
   def load_travis_data
     Repository.where(organization: org).find_each do |repo|
       response = client.repo_file_exists? repo.name, '.travis.yml'

@@ -7,7 +7,6 @@ class CreateRepositories < ActiveRecord::Migration[5.1]
       t.string :language
       t.string :documentation_url
       t.boolean :has_capistrano
-      t.boolean :has_rspec
       t.boolean :has_travis
       t.boolean :has_honeybadger
       t.boolean :has_okcomputer

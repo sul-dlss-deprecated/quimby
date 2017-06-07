@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20170526221301) do
     t.string "language"
     t.string "documentation_url"
     t.boolean "has_capistrano"
-    t.boolean "has_rspec"
     t.boolean "has_travis"
     t.boolean "has_honeybadger"
     t.boolean "has_okcomputer"
