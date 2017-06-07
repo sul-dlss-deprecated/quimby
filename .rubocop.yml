@@ -16,6 +16,7 @@ AllCops:
     - 'spec/fixtures/**/*'
     - 'spec/models/repo_data_spec.rb' # main describe block too big :(
     - 'spec/models/github_client_spec.rb' # main describe block too big :(
+    - 'spec/features/repositories_table_spec.rb' # too man expects :(
     - 'spec/spec_helper.rb'
     - 'spec/rails_helper.rb'
     - 'vendor/**/*'
