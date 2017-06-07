@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170526221301) do
+ActiveRecord::Schema.define(version: 20170607163348) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "deploy_environments", force: :cascade do |t|
+    t.string "name"
+    t.bigint "server_id"
+    t.bigint "repository_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_id"], name: "index_deploy_environments_on_repository_id"
+    t.index ["server_id"], name: "index_deploy_environments_on_server_id"
+  end
 
   create_table "repositories", force: :cascade do |t|
     t.string "name"
@@ -26,6 +39,16 @@ ActiveRecord::Schema.define(version: 20170526221301) do
     t.boolean "has_coveralls"
     t.boolean "is_gem"
     t.boolean "is_rails"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "servers", force: :cascade do |t|
+    t.string "hostname"
+    t.string "fqdn"
+    t.inet "ip"
+    t.string "dev_team"
+    t.boolean "pupgraded"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
