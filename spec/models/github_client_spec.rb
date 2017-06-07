@@ -97,7 +97,7 @@ RSpec.describe GithubClient do
       end
 
       it 'returns array of filenames' do
-        expect(client.list_directory_contents('fake', '/')).to eq ['octokit.rb', 'octokitty']
+        expect(client.list_directory_contents('fake', '/')).to eq ['octokit.rb', 'octokitty', 'octokit.gemspec']
       end
     end
 
@@ -107,8 +107,8 @@ RSpec.describe GithubClient do
         stub_request(:any, /api.github.com/).to_return(status: 404, body: response)
       end
 
-      it 'returns empty string if path invalid' do
-        expect(client.list_directory_contents('fake', '/test')).to be ''
+      it 'returns empty array if path invalid' do
+        expect(client.list_directory_contents('fake', '/test')).to eq []
       end
     end
   end
