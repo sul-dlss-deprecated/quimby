@@ -11,6 +11,7 @@ class CreateRepositories < ActiveRecord::Migration[5.1]
       t.boolean :has_honeybadger
       t.boolean :has_okcomputer
       t.boolean :has_is_it_working
+      t.boolean :has_coveralls
       t.boolean :is_gem
       t.boolean :is_rails
 

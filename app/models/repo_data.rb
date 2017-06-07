@@ -52,6 +52,13 @@ class RepoData
     end
   end
 
+  def load_coveralls_data
+    Repository.where(organization: org).find_each do |repo|
+      response = client.repo_file_contains? repo.name, 'Gemfile', 'coveralls'
+      repo.update(has_coveralls: response)
+    end
+  end
+
   def load_gem_data
     Repository.where(organization: org).find_each do |repo|
       response = client.repo_file_exists? repo.name, "#{repo.name}.gemspec"

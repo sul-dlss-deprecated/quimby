@@ -10,6 +10,7 @@ namespace :load_repo_data do
     repodata.load_okcomputer_data
     repodata.load_is_it_working_data
     repodata.load_honeybadger_data
+    repodata.load_coveralls_data
     repodata.load_gem_data
     repodata.load_rails_data
   end

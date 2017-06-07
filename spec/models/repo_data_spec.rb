@@ -186,6 +186,37 @@ RSpec.describe RepoData do
     end
   end
 
+  describe '#load_coveralls_data' do
+    describe 'with a valid response' do
+      before do
+        response = file_fixture('repo_data_get_file_contents').read
+        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
+      end
+
+      it 'sets the field name to be true' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_coveralls_data
+          repo.reload
+        end.to change { repo.has_coveralls }.to be true
+      end
+    end
+
+    describe 'with an exception thrown' do
+      before do
+        stub_request(:any, /api.github.com/).to_return(status: 404)
+      end
+
+      it 'sets the field name to false' do
+        repo = create(:repository)
+        expect do
+          repo_data.load_coveralls_data
+          repo.reload
+        end.to change { repo.has_coveralls }.to be false
+      end
+    end
+  end
+
   describe '#load_gem_data' do
     describe 'with a valid response' do
       before do
@@ -296,6 +327,12 @@ RSpec.describe RepoData do
         create_list(:repository, 10)
         repo_data.load_honeybadger_data
         expect(Repository.all.all?(&:has_honeybadger)).to be true
+      end
+
+      it 'for load_coveralls_data' do
+        create_list(:repository, 10)
+        repo_data.load_coveralls_data
+        expect(Repository.all.all?(&:has_coveralls)).to be true
       end
 
       it 'for load_rails_data' do
