@@ -9,4 +9,8 @@ class NullResponse
   def content
     ''
   end
+
+  def map
+    ''
+  end
 end

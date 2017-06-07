@@ -88,4 +88,28 @@ RSpec.describe GithubClient do
       end
     end
   end
+
+  describe '#list_directory_contents' do
+    describe 'with valid response' do
+      before do
+        response = file_fixture('repo_data_list_files').read
+        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
+      end
+
+      it 'returns array of filenames' do
+        expect(client.list_directory_contents('fake', '/')).to eq ['octokit.rb', 'octokitty']
+      end
+    end
+
+    describe 'with invalid response' do
+      before do
+        response = file_fixture('repo_data_list_files').read
+        stub_request(:any, /api.github.com/).to_return(status: 404, body: response)
+      end
+
+      it 'returns empty string if path invalid' do
+        expect(client.list_directory_contents('fake', '/test')).to be ''
+      end
+    end
+  end
 end
