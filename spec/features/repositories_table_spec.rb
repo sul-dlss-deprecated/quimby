@@ -7,7 +7,7 @@ describe 'Repositories index table', type: :feature do
     r = create(:repository_index)
     visit repositories_index_path
     expect(body).to have_link('Hello-World', href: 'github.com')
-    expect(body).to have_text("#{r.language.downcase}")
+    expect(body).to have_text(r.language.downcase.to_s)
     expect(body).to have_text('rails')
     expect(body).to have_text('gem')
     expect(body).to have_text('capistrano')
