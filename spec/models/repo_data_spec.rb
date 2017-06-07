@@ -62,37 +62,6 @@ RSpec.describe RepoData do
     end
   end
 
-  describe '#load_rspec_data' do
-    describe 'with valid response' do
-      before do
-        response = file_fixture('repo_data_get_file').read
-        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
-      end
-
-      it 'sets rspec field to true' do
-        repo = create(:repository)
-        expect do
-          repo_data.load_rspec_data
-          repo.reload
-        end.to change { repo.has_rspec }.to be true
-      end
-    end
-
-    describe 'with invalid response' do
-      before do
-        stub_request(:any, /api.github.com/).to_return(status: 404)
-      end
-
-      it 'sets rspec field to false' do
-        repo = create(:repository)
-        expect do
-          repo_data.load_rspec_data
-          repo.reload
-        end.to change { repo.has_rspec }.to be false
-      end
-    end
-  end
-
   describe '#load_travis_data' do
     describe 'with valid response' do
       before do
@@ -290,12 +259,6 @@ RSpec.describe RepoData do
         create_list(:repository, 10)
         repo_data.load_capistrano_data
         expect(Repository.all.all?(&:has_capistrano)).to be true
-      end
-
-      it 'for load_rspec_data' do
-        create_list(:repository, 10)
-        repo_data.load_rspec_data
-        expect(Repository.all.all?(&:has_rspec)).to be true
       end
 
       it 'for load_travis_data' do
