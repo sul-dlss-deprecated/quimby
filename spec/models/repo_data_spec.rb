@@ -220,7 +220,7 @@ RSpec.describe RepoData do
   describe '#load_gem_data' do
     describe 'with a valid response' do
       before do
-        response = file_fixture('repo_data_get_file').read
+        response = file_fixture('repo_data_list_files').read
         stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
       end
 
@@ -308,6 +308,13 @@ RSpec.describe RepoData do
         create_list(:repository, 10)
         repo_data.load_is_it_working_data
         expect(Repository.all.all?(&:has_is_it_working)).to be true
+      end
+    end
+
+    describe 'based on list_directory_contents' do
+      before do
+        response = file_fixture('repo_data_list_files').read
+        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
       end
 
       it 'for load_gem_data' do

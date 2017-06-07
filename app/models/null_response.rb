@@ -11,6 +11,6 @@ class NullResponse
   end
 
   def map
-    ''
+    []
   end
 end

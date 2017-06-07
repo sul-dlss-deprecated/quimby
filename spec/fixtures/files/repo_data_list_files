@@ -6,5 +6,9 @@
   {
     "type": "dir",
     "name": "octokitty"
+  },
+  {
+    "type": "file",
+    "name": "octokit.gemspec"
   }
 ]

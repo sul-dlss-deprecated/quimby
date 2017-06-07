@@ -61,7 +61,7 @@ class RepoData
 
   def load_gem_data
     Repository.where(organization: org).find_each do |repo|
-      response = client.repo_file_exists? repo.name, "#{repo.name}.gemspec"
+      response = client.list_directory_contents(repo.name, '/').grep(/gemspec/).any?
       repo.update(is_gem: response)
     end
   end
