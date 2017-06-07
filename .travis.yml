@@ -3,3 +3,7 @@ notifications:
 language: ruby
 rvm:
   - 2.4.1
+services:
+  - postgresql
+before_script:
+  - bundle exec rake db:create
