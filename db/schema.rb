@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170526221301) do
     t.boolean "has_honeybadger"
     t.boolean "has_okcomputer"
     t.boolean "has_is_it_working"
+    t.boolean "has_coveralls"
     t.boolean "is_gem"
     t.boolean "is_rails"
     t.datetime "created_at", null: false
