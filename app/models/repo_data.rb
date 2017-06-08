@@ -13,6 +13,8 @@ class RepoData
       Repository.find_or_create_by(name: r.name, organization: org) do |repo|
         repo.url = r.html_url
         repo.language = r.language
+        repo.is_private = r.private
+        repo.default_branch = r.default_branch
       end
     end
   end
