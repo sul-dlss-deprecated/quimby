@@ -23,6 +23,8 @@ RSpec.describe RepoData do
       expect(repo.organization).to eq 'octocat'
       expect(repo.url).to eq 'https://github.com/octocat/Hello-World'
       expect(repo.language).to eq 'ruby'
+      expect(repo.is_private).to be false
+      expect(repo.default_branch).to eq 'master'
     end
 
     it 'only creates unique objects on name and organization' do
