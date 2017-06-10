@@ -89,7 +89,7 @@ RSpec.describe GithubClient do
     end
   end
 
-  describe '#list_directory_contents' do
+  describe '#list_files_at_path' do
     describe 'with valid response' do
       before do
         response = file_fixture('repo_data_list_files').read
@@ -97,7 +97,7 @@ RSpec.describe GithubClient do
       end
 
       it 'returns array of filenames' do
-        expect(client.list_directory_contents('fake', '/')).to eq ['octokit.rb', 'octokitty', 'octokit.gemspec']
+        expect(client.list_files_at_path('fake', '/')).to eq ['octokit.rb', 'octokitty', 'octokit.gemspec']
       end
     end
 
@@ -108,7 +108,7 @@ RSpec.describe GithubClient do
       end
 
       it 'returns empty array if path invalid' do
-        expect(client.list_directory_contents('fake', '/test')).to eq []
+        expect(client.list_files_at_path('fake', '/test')).to eq []
       end
     end
   end

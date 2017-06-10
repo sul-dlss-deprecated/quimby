@@ -313,7 +313,7 @@ RSpec.describe RepoData do
       end
     end
 
-    describe 'based on list_directory_contents' do
+    describe 'based on list_files_at_path' do
       before do
         response = file_fixture('repo_data_list_files').read
         stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
