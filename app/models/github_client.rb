@@ -31,9 +31,9 @@ class GithubClient
     content_contains?(decoded_file, search_string)
   end
 
-  def list_directory_contents(repo_name, path)
+  def list_files_at_path(repo_name, path)
     file_data = get_repo_file_data(repo_name, path)
-    file_data.map(&:name)
+    file_data.map(&:path)
   end
 
   private

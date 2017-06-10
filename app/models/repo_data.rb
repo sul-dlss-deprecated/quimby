@@ -63,7 +63,7 @@ class RepoData
 
   def load_gem_data
     Repository.where(organization: org).find_each do |repo|
-      response = client.list_directory_contents(repo.name, '/').grep(/gemspec/).any?
+      response = client.list_files_at_path(repo.name, '/').grep(/gemspec/).any?
       repo.update(is_gem: response)
     end
   end

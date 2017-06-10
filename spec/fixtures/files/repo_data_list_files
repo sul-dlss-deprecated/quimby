@@ -1,14 +1,14 @@
 [
   {
     "type": "file",
-    "name": "octokit.rb"
+    "path": "octokit.rb"
   },
   {
     "type": "dir",
-    "name": "octokitty"
+    "path": "octokitty"
   },
   {
     "type": "file",
-    "name": "octokit.gemspec"
+    "path": "octokit.gemspec"
   }
 ]
