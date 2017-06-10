@@ -20,4 +20,7 @@ FactoryGirl.define do
     has_okcomputer 'true'
     has_is_it_working 'true'
   end
+
+  factory :server do
+  end
 end
