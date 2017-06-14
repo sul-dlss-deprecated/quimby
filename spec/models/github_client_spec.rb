@@ -112,4 +112,28 @@ RSpec.describe GithubClient do
       end
     end
   end
+
+  describe '#file_content' do
+    describe 'with valid response' do
+      before do
+        response = file_fixture('repo_data_get_file_contents').read
+        stub_request(:any, /api.github.com/).to_return(status: 200, body: response)
+      end
+
+      it 'returns text blob' do
+        expect(client.file_content('fake', 'Gemfile')).to include 'rubygems.org'
+      end
+    end
+
+    describe 'with invalid response' do
+      before do
+        response = file_fixture('repo_data_get_file_contents').read
+        stub_request(:any, /api.github.com/).to_return(status: 404, body: response)
+      end
+
+      it 'returns empty string if path invalid' do
+        expect(client.file_content('fake', 'test')).to eq ''
+      end
+    end
+  end
 end

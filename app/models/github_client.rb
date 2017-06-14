@@ -36,6 +36,11 @@ class GithubClient
     file_data.map(&:path)
   end
 
+  def file_content(repo_name, path)
+    file_data = get_repo_file_data repo_name, path
+    decoded_file_content(file_data.content)
+  end
+
   private
 
   def repo_contents_client
