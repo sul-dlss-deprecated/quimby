@@ -1,0 +1,6 @@
+[
+  {
+    "type": "file",
+    "path": "config/deploy/dev.rb"
+  }
+]
