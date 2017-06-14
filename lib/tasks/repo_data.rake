@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-namespace :load_repo_data do
+namespace :load_data do
   desc 'loads repo data for the sul-dlss org'
   task dlss: :environment do
     repodata = RepoData.new('sul-dlss')
@@ -13,5 +13,7 @@ namespace :load_repo_data do
     repodata.load_coveralls_data
     repodata.load_gem_data
     repodata.load_rails_data
+    ServerHieraData.run
+    DeployData.run('sul-dlss')
   end
 end
