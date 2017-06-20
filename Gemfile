@@ -38,6 +38,7 @@ gem 'github_api'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'devise'
+gem 'friendly_id'
 gem 'whenever'
 
 group :development, :test do

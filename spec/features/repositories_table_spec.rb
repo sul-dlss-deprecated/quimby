@@ -7,7 +7,7 @@ describe 'Repositories index table', type: :feature do
     user = create(:user)
     login_as(user, scope: :user)
     r = create(:repository_index)
-    visit repositories_index_path
+    visit repositories_path
     expect(body).to have_link('Hello-World', href: 'github.com')
     expect(body).to have_text(r.language.downcase.to_s)
     expect(body).to have_text('rails')

@@ -7,6 +7,7 @@ class CreateRepositories < ActiveRecord::Migration[5.1]
       t.string :language
       t.string :documentation_url
       t.string :default_branch
+      t.string :slug
       t.boolean :has_capistrano
       t.index :has_capistrano
       t.boolean :has_travis
@@ -20,5 +21,6 @@ class CreateRepositories < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
+    add_index :repositories, :slug, unique: true
   end
 end

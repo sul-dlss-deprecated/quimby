@@ -1,0 +1,26 @@
+<div class='container'>
+  <h2><%= @repository.name %></h2>
+
+  <dl class='row'>
+    <dt class='col-sm-3'>github url:</dt>
+    <dd class='col-sm-9'><%= link_to "#{@repository.url}", "#{@repository.url}" %></dd>
+
+    <% unless @repository.servers.empty?  %>
+      <dt class='col-sm-3'>servers:</dt>
+      <dd class='col-sm-9'>
+        <% @repository.unique_deploy_envs.each do |environment| %>
+          <dl class='row col-sm-6'>
+            <dt class='col-sm-3'><%= environment %>:</dt>
+            <div class='container'>
+              <ul class='list-group'>
+                <% @repository.servers_deployed_to(environment).each do |server| %>
+                  <li class='list-group-item list-group-item-info'><%= server %></li>
+                <% end %>
+              </ul>
+            </div>
+          </dl>
+        <% end %>
+      </dd>
+    <% end %>
+  </dl>
+</div>
