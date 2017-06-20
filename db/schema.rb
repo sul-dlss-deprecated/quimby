@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616051105) do
+ActiveRecord::Schema.define(version: 20170620172028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(version: 20170616051105) do
     t.index ["server_id"], name: "index_deploy_environments_on_server_id"
   end
 
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
   create_table "repositories", force: :cascade do |t|
     t.string "name"
     t.string "url"
@@ -32,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170616051105) do
     t.string "language"
     t.string "documentation_url"
     t.string "default_branch"
+    t.string "slug"
     t.boolean "has_capistrano"
     t.boolean "has_travis"
     t.boolean "has_honeybadger"
@@ -44,6 +57,7 @@ ActiveRecord::Schema.define(version: 20170616051105) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["has_capistrano"], name: "index_repositories_on_has_capistrano"
+    t.index ["slug"], name: "index_repositories_on_slug", unique: true
   end
 
   create_table "servers", force: :cascade do |t|
