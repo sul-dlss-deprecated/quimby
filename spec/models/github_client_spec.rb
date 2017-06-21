@@ -37,7 +37,7 @@ RSpec.describe GithubClient do
     end
 
     it 'returns all repo names as an array' do
-      expect(client.all_repo_names).to eq ['Hello-World', 'Hello-World2']
+      expect(client.all_repo_names).to eq ['Hello-World2']
     end
   end
 

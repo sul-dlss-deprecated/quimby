@@ -1,12 +1,5 @@
 [
   {
-    "name": "Hello-World",
-    "html_url": "https://github.com/octocat/Hello-World",
-    "language": "ruby",
-    "private": false,
-    "default_branch": "master"
-  },
-  {
     "name": "Hello-World2",
     "html_url": "https://github.com/octocat/Hello-World2",
     "language": "java",
