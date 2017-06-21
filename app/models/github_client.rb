@@ -3,18 +3,21 @@
 require 'github_api'
 
 class GithubClient
-  attr_reader :api
+  attr_reader :api, :org
 
   def initialize(org)
     @api = Github.new do |c|
       c.auto_pagination = true
       c.oauth_token = Settings.GITHUB_OAUTH_TOKEN
-      c.user = org
+      c.org = org
     end
+    @org = org
   end
 
   def all_repos
     @repos ||= api.repos.all
+  rescue Github::Error::NotFound
+    NullResponse.new
   end
 
   def all_repo_names
@@ -44,7 +47,7 @@ class GithubClient
   private
 
   def repo_contents_client
-    @repo_contents ||= api.repos.contents
+    @repo_contents ||= api.repos.contents user: org
   end
 
   def get_repo_file_data(repo_name, path)

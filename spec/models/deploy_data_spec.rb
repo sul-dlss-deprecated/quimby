@@ -11,7 +11,7 @@ RSpec.describe DeployData do
     end
 
     it 'sets org to test-org' do
-      expect(deploy_data.client.api.user).to eq 'test-org'
+      expect(deploy_data.client.api.org).to eq 'test-org'
     end
   end
 

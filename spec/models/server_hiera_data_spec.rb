@@ -11,7 +11,7 @@ RSpec.describe ServerHieraData do
     end
 
     it 'sets org to sul-dlss' do
-      expect(server_data.client.api.user).to eq 'sul-dlss'
+      expect(server_data.client.api.org).to eq 'sul-dlss'
     end
   end
 
