@@ -69,7 +69,7 @@ class RepoData
   end
 
   def load_rails_data(repo)
-    response = client.repo_file_contains? repo.name, 'Gemfile', 'rails'
+    response = client.repo_file_contains? repo.name, 'Gemfile', "'rails'"
     repo.is_rails = response
   end
 
