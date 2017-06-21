@@ -11,7 +11,7 @@ RSpec.describe GithubClient do
     end
 
     it 'sets the clients user to the passed org' do
-      expect(client.api.user).to eq 'test-org'
+      expect(client.api.org).to eq 'test-org'
     end
   end
 

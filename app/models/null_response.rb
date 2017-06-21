@@ -13,4 +13,8 @@ class NullResponse
   def map
     []
   end
+
+  def each
+    ''
+  end
 end
