@@ -38,6 +38,9 @@
             <% if r.has_is_it_working %>
               <span class="badge badge-repos badge-default">is_it_working</span>
             <% end %>
+            <% if r.is_gem || r.is_rails %>
+              <%= link_to image_tag("https://img.shields.io/gemnasium/#{r.organization}/#{r.name}.svg"), "https://gemnasium.com/#{r.organization}/#{r.name}", :target => "_blank" %>
+            <% end %>
           </td>
         </tr>
         <% end %>
