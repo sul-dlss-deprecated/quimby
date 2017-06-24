@@ -141,6 +141,8 @@ GEM
       activesupport (>= 4.2.0)
     hashdiff (0.3.4)
     hashie (3.5.5)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (0.8.1)
     jbuilder (2.6.4)
       activesupport (>= 3.0.0)
@@ -192,6 +194,8 @@ GEM
       websocket-driver (>= 0.2.0)
     powerpack (0.1.1)
     puma (3.8.2)
+    puppetdb-ruby (0.0.1)
+      httparty
     rack (2.0.3)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -349,6 +353,7 @@ DEPENDENCIES
   pg
   poltergeist
   puma (~> 3.7)
+  puppetdb-ruby
   rails (~> 5.1.1)
   rails-controller-testing
   rspec-rails
