@@ -40,6 +40,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'friendly_id'
 gem 'whenever'
+gem 'therubyracer'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -62,6 +63,14 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+end
+
+group :deployment do
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger', '~> 0.2.0'
+  gem 'dlss-capistrano'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
