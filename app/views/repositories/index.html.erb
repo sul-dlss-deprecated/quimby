@@ -8,7 +8,8 @@
         <% @repositories.each do |r| %>
         <tr>
           <td>
-            <%= link_to r.name, r.url, :target => "_blank" %>
+            <%= link_to r.name, repository_path(r.name), :target => "_blank" %>
+            <%= link_to image_tag('github', size: '14'), r.url, :target => "_blank" %>
           </td>
           <td>
             <% if r.language %>
