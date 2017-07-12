@@ -18,13 +18,15 @@ RSpec.describe RepoData do
   describe '#load_data' do
     describe 'with valid response' do
       before do
-        first = file_fixture('all_repos').read
-        second = file_fixture('repo_data_get_file_contents').read
-        third = file_fixture('repo_data_list_files').read
+        allrepos = file_fixture('all_repos').read
+        gemfile = file_fixture('repo_data_get_file_contents').read
+        capfile = file_fixture('repo_data_get_capfile_contents').read
+        list_files = file_fixture('repo_data_list_files').read
         stub_request(:any, /api.github.com/)
-          .to_return(status: 200, body: first).then
-          .to_return(status: 200, body: second).times(7).then
-          .to_return(status: 200, body: third)
+          .to_return(status: 200, body: allrepos).then
+          .to_return(status: 200, body: gemfile).times(7).then
+          .to_return(status: 200, body: capfile).then
+          .to_return(status: 200, body: list_files)
       end
 
       it 'creates objects from api response' do
@@ -43,6 +45,7 @@ RSpec.describe RepoData do
         expect(repo.has_is_it_working).to be true
         expect(repo.has_coveralls).to be true
         expect(repo.is_rails).to be true
+        expect(repo.has_honeybadger_deploy).to be true
         expect(repo.is_gem).to be true
       end
 
