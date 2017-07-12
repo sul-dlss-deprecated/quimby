@@ -35,6 +35,7 @@ class RepoData
     load_honeybadger_data(repo)
     load_coveralls_data(repo)
     load_rails_data(repo)
+    load_honeybadger_deploy_data(repo)
     load_gem_data(repo)
   end
 
@@ -71,6 +72,11 @@ class RepoData
   def load_rails_data(repo)
     response = client.repo_file_contains? repo.name, 'Gemfile', "'rails'"
     repo.is_rails = response
+  end
+
+  def load_honeybadger_deploy_data(repo)
+    response = client.repo_file_contains? repo.name, 'Capfile', 'capistrano/honeybadger'
+    repo.has_honeybadger_deploy = response
   end
 
   def load_gem_data(repo)

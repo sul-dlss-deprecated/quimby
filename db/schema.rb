@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20170620172028) do
     t.boolean "has_capistrano"
     t.boolean "has_travis"
     t.boolean "has_honeybadger"
+    t.boolean "has_honeybadger_deploy"
     t.boolean "has_okcomputer"
     t.boolean "has_is_it_working"
     t.boolean "has_coveralls"
