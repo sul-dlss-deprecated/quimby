@@ -14,7 +14,7 @@ class RepoData
 
   def load_data
     client.all_repos.each do |r|
-      Repository.find_or_create_by(name: r.name, organization: org) do |repo|
+      Repository.find_or_create_by(name: r.name.downcase, organization: org) do |repo|
         repo.url = r.html_url
         repo.language = r.language
         repo.is_private = r.private

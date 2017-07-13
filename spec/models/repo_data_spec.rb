@@ -32,7 +32,7 @@ RSpec.describe RepoData do
       it 'creates objects from api response' do
         repo_data.load_data
         repo = Repository.last
-        expect(repo.name).to eq 'Hello-World2'
+        expect(repo.name).to eq 'hello-world2'
         expect(repo.organization).to eq 'octocat'
         expect(repo.url).to eq 'https://github.com/octocat/Hello-World2'
         expect(repo.language).to eq 'java'
@@ -78,7 +78,7 @@ RSpec.describe RepoData do
       it 'no Repository object created' do
         repo_data.load_data
         repo = Repository.last
-        expect(repo.name).to eq 'Hello-World2'
+        expect(repo.name).to eq 'hello-world2'
         expect(repo.organization).to eq 'octocat'
         expect(repo.url).to eq 'https://github.com/octocat/Hello-World2'
         expect(repo.language).to eq 'java'
