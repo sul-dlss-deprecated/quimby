@@ -141,6 +141,8 @@ GEM
       activesupport (>= 4.2.0)
     hashdiff (0.3.4)
     hashie (3.5.5)
+    honeybadger-api (2.1.0)
+      json
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
     i18n (0.8.1)
@@ -346,6 +348,7 @@ DEPENDENCIES
   factory_girl_rails
   friendly_id
   github_api
+  honeybadger-api
   jbuilder (~> 2.5)
   jquery-rails
   launchy
