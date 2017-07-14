@@ -1,0 +1,33 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "name": "Hello-World",
+      "owner": {},
+      "users": [],
+      "token": "a1b2c3",
+      "environments": [],
+      "teams": [],
+      "active": true,
+      "disable_public_links": false,
+      "fault_count": 10,
+      "unresolved_fault_count": 2
+    },
+    {
+      "id": 2,
+      "name": "Hello-World2",
+      "owner": {},
+      "users": [],
+      "token": "a1b2c3",
+      "environments": [],
+      "teams": [],
+      "active": true,
+      "disable_public_links": false,
+      "fault_count": 10,
+      "unresolved_fault_count": 2
+    }
+  ],
+  "links": {
+    "self": "https://app.honeybadger.io/v2/projects"
+  }
+}
