@@ -14,7 +14,7 @@ RSpec.feature 'Auth', type: :feature do
     click_button 'Sign in'
     expect(page).to have_content('Repositories')
 
-    click_link 'logout'
+    click_link 'Logout'
     expect(page).to have_content('Sign in')
   end
 end
