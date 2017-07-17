@@ -61,6 +61,8 @@ class GithubClient
   end
 
   def content_contains?(content, search_string)
-    content.include?(search_string)
+    result = content.scan(/^[A-Za-z0-9\s]*[\'\"]#{search_string}[\'\"]/)
+    return false if result.empty?
+    true
   end
 end
