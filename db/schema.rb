@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20170620172028) do
     t.string "documentation_url"
     t.string "default_branch"
     t.string "slug"
+    t.boolean "current"
     t.boolean "has_capistrano"
     t.boolean "has_travis"
     t.boolean "has_honeybadger"
