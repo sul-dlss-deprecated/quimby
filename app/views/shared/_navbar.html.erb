@@ -5,7 +5,11 @@
   <a class="navbar-brand">Quimby</a>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
+      <% if current_page?(repositories_path) %>
+      <li class="nav-item active">
+      <% else %>
       <li class="nav-item">
+      <% end %>
         <%= link_to 'Repositories', repositories_path, class: 'nav-link' %>
       </li>
     </ul>
