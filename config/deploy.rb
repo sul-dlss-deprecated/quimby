@@ -9,3 +9,5 @@ set :deploy_to, '/opt/app/quimby/quimby'
 
 # Default value for linked_dirs is []
 append :linked_dirs, 'log'
+
+set :honeybadger_env, fetch :stage
