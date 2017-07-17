@@ -8,6 +8,7 @@ class CreateRepositories < ActiveRecord::Migration[5.1]
       t.string :documentation_url
       t.string :default_branch
       t.string :slug
+      t.boolean :current
       t.boolean :has_capistrano
       t.index :has_capistrano
       t.boolean :has_travis
