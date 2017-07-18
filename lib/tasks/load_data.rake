@@ -3,7 +3,6 @@
 namespace :load_data do
   desc 'loads server data from puppet and puppet\'s hiera files'
   task servers: :environment do
-    ServerHieraData.run
     ServerPuppetData.run
   end
 
