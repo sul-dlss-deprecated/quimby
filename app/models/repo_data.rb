@@ -12,6 +12,7 @@ class RepoData
     new(org).load_data
   end
 
+  # rubocop:disable Metrics/MethodLength
   def load_data
     client.all_repos.each do |r|
       Repository.find_or_create_by(name: r.name.downcase, organization: org) do |repo|
@@ -19,11 +20,14 @@ class RepoData
         repo.language = r.language
         repo.is_private = r.private
         repo.default_branch = r.default_branch
+        repo.current = true
         load_file_based_data(repo)
       end
     end
+    flag_deleted_repos
     true
   end
+  # rubocop:enable Metrics/MethodLength
 
   private
 
@@ -82,5 +86,16 @@ class RepoData
   def load_gem_data(repo)
     response = client.list_files_at_path(repo.name, '/').grep(/gemspec/).any?
     repo.is_gem = response
+  end
+
+  def flag_deleted_repos
+    db_repos = Repository.all.map(&:name)
+    downcased_repos = client.all_repo_names.map(&:downcase)
+
+    result = db_repos - downcased_repos
+    result.each do |repo|
+      record = Repository.find_by(name: repo)
+      record.update(current: false)
+    end
   end
 end
