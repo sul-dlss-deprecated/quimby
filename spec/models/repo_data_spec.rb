@@ -53,6 +53,15 @@ RSpec.describe RepoData do
         create(:repository)
         expect { repo_data.load_data }.to change { Repository.all.count }.by 1
       end
+
+      it 'flags repos as not current if no longer in GH organization' do
+        create(:repository)
+        repo_data.load_data
+        repo1 = Repository.first
+        repo2 = Repository.last
+        expect(repo1.current).to eq false
+        expect(repo2.current).to eq true
+      end
     end
 
     describe 'with invalid response' do
