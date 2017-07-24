@@ -18,4 +18,24 @@ describe 'Repositories index table', type: :feature do
     expect(body).to have_text('okcomputer')
     expect(body).to have_text('is_it_working')
   end
+
+  it 'filters set params properly to true' do
+    user = create(:user)
+    login_as(user, scope: :user)
+    create(:repository_index)
+    visit repositories_path
+    find('#deployable').select('true')
+    click_button 'Filter'
+    expect(page).to have_current_path(repositories_path(deployable: 'true'))
+  end
+
+  it 'filters set params properly to false' do
+    user = create(:user)
+    login_as(user, scope: :user)
+    create(:repository_index)
+    visit repositories_path
+    find('#deployable').select('false')
+    click_button 'Filter'
+    expect(page).to have_current_path(repositories_path(deployable: 'false'))
+  end
 end
