@@ -8,7 +8,7 @@ Devise.setup do |config|
       name: 'displayName',
       last_name: 'sn'
     },
-    extra_fields: %i[suAffiliation]
+    extra_fields: %i[suAffiliation eduPersonEntitlement]
   }
 
   # The secret key used by Devise. Devise uses this key to generate
