@@ -15,4 +15,23 @@ class PuppetdbClient
     response = client.request('facts', ['and', ['=', 'certname', fqdn], ['=', 'name', 'ipaddress']])
     response.data.first['value']
   end
+
+  def all_fqdns
+    response = client.request('facts', ['=', 'name', 'hostname'])
+    response.data.collect { |key| key['certname'] }
+  end
+
+  def pupgraded_fqdns
+    response = client.request('facts', ['and',
+                                        ['=', 'name', 'fqdn'],
+                                        ['in', 'certname',
+                                         ['extract', 'certname',
+                                          ['select-resources',
+                                           ['and', ['=', 'type', 'Class'], ['=', 'title', 'Role::Basenode']]]]]])
+    response.data.collect { |key| key['certname'] }
+  end
+
+  def pupgraded?(fqdn)
+    pupgraded_fqdns.include?(fqdn) ? true : false
+  end
 end

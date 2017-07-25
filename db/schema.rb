@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20170620172028) do
   create_table "servers", force: :cascade do |t|
     t.string "hostname"
     t.string "fqdn"
-    t.inet "ip"
+    t.string "ip"
     t.string "dev_team"
     t.boolean "pupgraded"
     t.datetime "created_at", null: false

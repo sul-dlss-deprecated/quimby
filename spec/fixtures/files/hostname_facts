@@ -1,0 +1,12 @@
+[
+  {
+    "value": "some-server-stage.stanford.edu",
+    "name": "hostname",
+    "certname": "some-server-stage.stanford.edu"
+  },
+  {
+    "value": "some-server-prod.stanford.edu",
+    "name": "hostname",
+    "certname": "some-server-prod.stanford.edu"
+  }
+]
