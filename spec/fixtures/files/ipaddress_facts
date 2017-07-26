@@ -3,5 +3,10 @@
     "value": "123.45.67.890",
     "name": "ipaddress",
     "certname": "some-server-stage.stanford.edu"
+  },
+  {
+    "value": "123.45.67.891",
+    "name": "ipaddress",
+    "certname": "some-server-prod.stanford.edu"
   }
 ]
