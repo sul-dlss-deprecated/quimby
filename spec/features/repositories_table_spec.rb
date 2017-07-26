@@ -4,8 +4,6 @@ require 'rails_helper'
 
 describe 'Repositories index table', type: :feature do
   it 'link for repo name to github' do
-    user = create(:user)
-    login_as(user, scope: :user)
     r = create(:repository_index)
     visit repositories_path
     expect(body).to have_link('Hello-World', href: '/repositories/Hello-World')
