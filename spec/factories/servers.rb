@@ -21,4 +21,10 @@ FactoryGirl.define do
     ip '123.45.67.891'
     dev_team 'devclub'
   end
+
+  factory :server_index, class: Server do
+    hostname 'server-dev'
+    ip '123.45.67.890'
+    pupgraded true
+  end
 end

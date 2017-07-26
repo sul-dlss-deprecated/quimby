@@ -14,7 +14,7 @@
             <div class='container'>
               <ul class='list-group'>
                 <% @repository.servers_deployed_to(environment).each do |server| %>
-                  <li class='list-group-item list-group-item-info'><%= server %></li>
+                  <li class='list-group-item list-group-item-info'><%= link_to "#{server}", "/servers##{server}", :target => "_blank" %></li>
                 <% end %>
               </ul>
             </div>
