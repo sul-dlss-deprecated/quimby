@@ -7,23 +7,19 @@ namespace :load_data do
   end
 
   desc 'loads repo data for the sul-dlss org'
-  task dlss: :environment do
+  task dlss: :servers do
     org = 'sul-dlss'
     RepoData.run(org)
     DeployData.run(org)
   end
 
   desc 'loads repo data for the sul-cidr org'
-  task cidr: :environment do
+  task cidr: :dlss do
     org = 'sul-cidr'
     RepoData.run(org)
     DeployData.run(org)
   end
 
-  desc 'loads it all'
-  task all: :environment do
-    Rake::Task['load_data:servers'].invoke
-    Rake::Task['load_data:dlss'].invoke
-    Rake::Task['load_data:cidr'].invoke
-  end
+  desc 'loads from all data sources in order'
+  task all: %i[environment servers dlss cidr]
 end
