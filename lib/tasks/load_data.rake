@@ -20,6 +20,11 @@ namespace :load_data do
     DeployData.run(org)
   end
 
+  desc 'loads gemnasium alerts into repo data'
+  task gemnasium: :environment do
+    RepoGemnasiumData.run
+  end
+
   desc 'loads from all data sources in order'
-  task all: %i[environment servers dlss cidr]
+  task all: %i[environment servers dlss cidr gemnasium]
 end

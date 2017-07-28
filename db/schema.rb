@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725221005) do
+ActiveRecord::Schema.define(version: 20170728202534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20170725221005) do
     t.boolean "has_honeybadger"
     t.boolean "has_honeybadger_deploy"
     t.integer "honeybadger_id"
+    t.integer "gemnasium_alerts"
     t.boolean "has_okcomputer"
     t.boolean "has_is_it_working"
     t.boolean "has_coveralls"

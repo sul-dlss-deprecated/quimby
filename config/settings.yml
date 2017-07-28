@@ -1,1 +1,2 @@
 GITHUB_OAUTH_TOKEN: 'insert_github_oauth_token'
+GEMNASIUM_API_TOKEN: 'insert_gemnasium_token'

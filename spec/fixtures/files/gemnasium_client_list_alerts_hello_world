@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "status": "open",
+    "open_at": "2017-06-01T13:57:03.368818Z",
+    "dependency": {
+      "id": 100
+    },
+    "advisory": {
+      "id": 1,
+      "title": "SMTP Injection via to/from addresses"
+    }
+  },
+  {
+    "id": 2,
+    "status": "open",
+    "open_at": "2017-05-15T15:33:13.377881Z",
+    "dependency": {
+      "id": 101
+    },
+    "advisory": {
+      "id": 2,
+      "title": "Upstream libxslt vulnerabilities"
+    }
+  }
+]

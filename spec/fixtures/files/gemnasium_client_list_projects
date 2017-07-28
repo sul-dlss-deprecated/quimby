@@ -1,0 +1,37 @@
+{
+  "owned": [
+    {
+      "slug": "sul-dlss/hello-world",
+      "name": "hello-world",
+      "description": "Monitored repo with alerts",
+      "origin": "github",
+      "private": true,
+      "color": "red",
+      "monitored": true,
+      "unmonitored_reason": "",
+      "commit_sha": ""
+    },
+    {
+      "slug": "sul-dlss/hello-world-clean",
+      "name": "hello-world-clean",
+      "description": "Monitored repo with no alerts",
+      "origin": "github",
+      "private": true,
+      "color": "green",
+      "monitored": true,
+      "unmonitored_reason": "",
+      "commit_sha": ""
+    },
+    {
+      "slug": "sul-dlss/hello-world-test",
+      "name": "hello-world-test",
+      "description": "Unmonitored repo with alerts",
+      "origin": "github",
+      "private": false,
+      "color": "red",
+      "monitored": true,
+      "unmonitored_reason": "",
+      "commit_sha": ""
+    }
+  ]
+}
