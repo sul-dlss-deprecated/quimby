@@ -5,6 +5,10 @@
     <dt class='col-sm-3'>github url:</dt>
     <dd class='col-sm-9'><%= link_to "#{@repository.url}", "#{@repository.url}" %></dd>
 
+    <% unless @repository.gemnasium_alerts.nil?  %>
+      <dt class='col-sm-3'>gemnasium alerts:</dt>
+      <dd class='col-sm-9'><%= link_to "#{@repository.gemnasium_alerts}", "https://gemnasium.com/github.com/#{@repository.organization}/#{@repository.name}/alerts" %></dd>
+    <% end %>
     <% unless @repository.servers.empty?  %>
       <dt class='col-sm-3'>servers:</dt>
       <dd class='col-sm-9'>
