@@ -6,6 +6,7 @@ class CreateServers < ActiveRecord::Migration[5.1]
       t.string :ip
       t.string :dev_team
       t.boolean :pupgraded
+      t.string :network
 
       t.timestamps
     end

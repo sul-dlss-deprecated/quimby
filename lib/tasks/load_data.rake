@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 namespace :load_data do
-  desc 'loads server data from puppetdb'
+  desc 'loads server data from puppetdb and vmware'
   task servers: :environment do
     ServerPuppetdbData.run
+    ServerVmwareData.run
   end
 
   desc 'loads repo data for the sul-dlss org'
