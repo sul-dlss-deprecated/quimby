@@ -13,4 +13,7 @@ require 'dlss/capistrano'
 require 'capistrano/scm/git'
 install_plugin Capistrano::SCM::Git
 
+# Install whenever.
+require 'whenever/capistrano'
+
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
