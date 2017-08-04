@@ -5,6 +5,7 @@ class Repository < ApplicationRecord
   has_many :servers, through: :deploy_environments
 
   scope :deployable, -> { where(has_capistrano: true) }
+  scope :monitorable, -> { where(has_okcomputer: true).or(where(has_is_it_working: true)) }
 
   extend FriendlyId
   friendly_id :name, use: :slugged

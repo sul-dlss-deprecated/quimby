@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 class RepositoriesController < ApplicationController
+  has_scope :deployable, type: :boolean
+  has_scope :monitorable, type: :boolean
+
   def index
-    @repositories = if params[:deployable].present?
-                      params[:deployable] == 'true' ? Repository.deployable : Repository.where(has_capistrano: false)
-                    else
-                      Repository.all
-                    end
+    @repositories = apply_scopes(Repository).all
   end
 
   def show
