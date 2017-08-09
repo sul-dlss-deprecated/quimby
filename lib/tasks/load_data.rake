@@ -36,6 +36,6 @@ namespace :load_data do
   end
 
   desc 'loads from all data sources in order'
-  task all: %i[environment servers dlss honeybadger]
+  task all: %i[environment servers dlss cidr gemnasium honeybadger]
 end
 # rubocop:enable BlockLength
