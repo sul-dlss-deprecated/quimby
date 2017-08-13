@@ -1,9 +1,5 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <%= link_to 'Quimby', root_path, class: "navbar-brand" %>
-  <div class="collapse navbar-collapse" id="navbarNav">
+<nav class="navbar navbar-toggleable-sm navbar-inverse fixed-top" style="background-color: #6bb5ea;">
+  <%= link_to image_tag('logo.svg') + ' Quimby', root_path, class: "navbar-brand" %>
     <ul class="navbar-nav mr-auto">
       <% if current_page?(repositories_path) || current_page?(root_path) %>
       <li class="nav-item active">
@@ -20,5 +16,4 @@
         <%= link_to 'Servers', servers_path, class: 'nav-link' %>
       </li>
     </ul>
-  </div>
 </nav>
