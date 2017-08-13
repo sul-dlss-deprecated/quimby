@@ -18,4 +18,48 @@ describe 'Repositories index table', type: :feature do
     expect(body).to have_text('okcomputer')
     expect(body).to have_text('is_it_working')
   end
+
+  it 'form sets valid params' do
+    create(:repository_index)
+    visit repositories_path
+    find('#deployable').select('true')
+    find('#documented').select('false')
+    find('#language').select('ruby')
+    find('#monitorable').select('true')
+    find('#tested').select('true')
+    click_button 'Filter'
+    expect(body).to have_link('Hello-World', href: '/repositories/Hello-World')
+  end
+
+  it 'filters from deployable' do
+    create(:repository_index)
+    visit repositories_path
+    find('#deployable').select('false')
+    click_button 'Filter'
+    expect(body).not_to have_link('Hello-World', href: '/repositories/Hello-World')
+  end
+
+  it 'filters from documented' do
+    create(:repository_index)
+    visit repositories_path
+    find('#documented').select('true')
+    click_button 'Filter'
+    expect(body).not_to have_link('Hello-World', href: '/repositories/Hello-World')
+  end
+
+  it 'filters from monitorable' do
+    create(:repository_index)
+    visit repositories_path
+    find('#monitorable').select('false')
+    click_button 'Filter'
+    expect(body).not_to have_link('Hello-World', href: '/repositories/Hello-World')
+  end
+
+  it 'filters from tested' do
+    create(:repository_index)
+    visit repositories_path
+    find('#tested').select('false')
+    click_button 'Filter'
+    expect(body).not_to have_link('Hello-World', href: '/repositories/Hello-World')
+  end
 end
