@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-faded fixed-top fixed-top-2">
+<nav class="navbar navbar-light bg-faded sticky-top">
   <%= form_tag repositories_path, method: :get, enforce_utf8: false , class: 'form-inline justify-content-center' do %>
     <label class="mr-sm-2">Language</label>
     <%= select_tag 'language', options_for_select(@repositories.collect { |repo| repo.language }.uniq, selected: params[:language]), include_blank: true, class: 'custom-select mr-sm-2' %>
