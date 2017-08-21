@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170728202534) do
+ActiveRecord::Schema.define(version: 20170821162928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "dependencies", force: :cascade do |t|
+    t.string "name"
+    t.string "version"
+    t.bigint "repository_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_id"], name: "index_dependencies_on_repository_id"
+  end
 
   create_table "deploy_environments", force: :cascade do |t|
     t.string "name"

@@ -1,0 +1,31 @@
+[
+  {
+    "id": 3863579,
+    "requirement": ">= 0.4.1",
+    "locked": "0.4.1",
+    "type": "runtime",
+    "first_level": true,
+    "color": "grey",
+    "package": {
+      "name": "lyberteam-devel",
+      "slug": "gems/lyberteam-devel",
+      "type": "Rubygem"
+    }
+  },
+  {
+    "id": 3863591,
+    "requirement": ">= 0",
+    "locked": "0.4.9",
+    "type": "runtime",
+    "first_level": false,
+    "color": "green",
+    "package": {
+      "name": "mediashelf-loggable",
+      "slug": "gems/mediashelf-loggable",
+      "type": "Rubygem",
+      "distributions": {
+        "stable": "0.4.9"
+      }
+    }
+  }
+]

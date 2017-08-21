@@ -5,8 +5,12 @@ class Repository < ApplicationRecord
 
   has_many :deploy_environments
   has_many :servers, through: :deploy_environments
+  has_many :dependencies
 
   scope :language, ->(language) { where(language: language) }
+  scope :dependency, ->(dependency) do
+    left_outer_joins(:dependencies).where('dependencies.name': dependency)
+  end
   scope :deployable, ->(deployable = true) { where(has_capistrano: deployable) }
   scope :monitorable, ->(monitorable) do
     if monitorable == 'true'

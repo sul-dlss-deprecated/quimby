@@ -2,7 +2,8 @@
 
 class RepositoriesController < ApplicationController
   def index
-    @repositories = Repository.order(:name).filter(params.slice(:language, :deployable, :monitorable, :tested, :tracked))
+    @repositories = Repository.order(:name).filter(params.slice(:language, :dependency, :deployable, :monitorable, :tested, :tracked))
+    @dependencies = Dependency.order(:name)
   end
 
   def show

@@ -26,6 +26,7 @@ describe 'Repositories index table', type: :feature do
     create(:repository_index)
     visit repositories_path
     find('#deployable').select('true')
+    find('#dependency').select('existence')
     find('#tracked').select('true')
     find('#language').select('ruby')
     find('#monitorable').select('true')
@@ -38,6 +39,14 @@ describe 'Repositories index table', type: :feature do
     create(:repository_index)
     visit repositories_path
     find('#deployable').select('false')
+    click_button 'Filter'
+    expect(body).not_to have_link('Hello-World', href: '/repositories/Hello-World')
+  end
+
+  it 'filters from dependency' do
+    create(:repository_dependencies_index)
+    visit repositories_path
+    find('#dependency').select('thesun')
     click_button 'Filter'
     expect(body).not_to have_link('Hello-World', href: '/repositories/Hello-World')
   end
