@@ -36,4 +36,36 @@ RSpec.describe GemnasiumClient do
       expect(sorted.first).to eq ['sul-dlss/hello-world', 2]
     end
   end
+
+  describe '#all_dependencies' do
+    before do
+      projects = file_fixture('gemnasium_client_list_projects').read
+      deps_hw = file_fixture('gemnasium_client_list_dependencies_hello_world').read
+      deps_hwc = file_fixture('gemnasium_client_list_dependencies_hello_world_clean').read
+      stub_request(:any, 'https://api.gemnasium.com/v1/projects').to_return(status: 200, body: projects)
+      stub_request(:any, 'https://api.gemnasium.com/v1/projects/sul-dlss/hello-world/dependencies').to_return(status: 200, body: deps_hw)
+      stub_request(:any, 'https://api.gemnasium.com/v1/projects/sul-dlss/hello-world-clean/dependencies').to_return(status: 200, body: deps_hwc)
+      stub_request(:any, 'https://api.gemnasium.com/v1/projects/sul-dlss/hello-world-test/dependencies').to_return(status: 200, body: deps_hwc)
+    end
+
+    it 'returns a hash' do
+      expect(client.all_dependencies).to be_kind_of Hash
+    end
+
+    it 'returns an array for each key' do
+      expect(client.all_dependencies.first).to be_kind_of Array
+    end
+
+    it 'returns accurate project name' do
+      sorted = client.all_dependencies.sort_by { |e| e[0] }
+      project, _deps = sorted.first
+      expect(project).to eq 'sul-dlss/hello-world'
+    end
+
+    it 'returns accurate project dependencies' do
+      sorted = client.all_dependencies.sort_by { |e| e[0] }
+      _project, deps = sorted.first
+      expect(deps.count).to eq 2
+    end
+  end
 end

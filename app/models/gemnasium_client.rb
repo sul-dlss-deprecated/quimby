@@ -14,12 +14,25 @@ class GemnasiumClient
 
   def all_projects_and_counts
     advisories = {}
-    slugs = all_projects
-    slugs.shuffle.each do |slug|
+    all_projects.each do |slug|
       alerts = fetch_api("#{api}/projects/#{slug}/alerts")
       advisories[slug] = alerts.count
     end
     advisories
+  end
+
+  def all_dependencies
+    gems = {}
+    all_projects.each do |slug|
+      gems[slug] = []
+
+      fetch_api("#{api}/projects/#{slug}/dependencies").each do |gem|
+        next unless gem['package']['type'] == 'Rubygem'
+        dep = { name: gem['package']['name'], version: gem['locked'] }
+        gems[slug].push(dep)
+      end
+    end
+    gems
   end
 
   private
