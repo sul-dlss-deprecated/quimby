@@ -16,6 +16,13 @@ class Repository < ApplicationRecord
     end
   end
   scope :tested, ->(tested) { where(has_travis: tested) }
+  scope :tracked, ->(tracked) do
+    if tracked == 'true'
+      where.not(gemnasium_alerts: nil).or(where(has_honeybadger: tracked))
+    else
+      where(gemnasium_alerts: nil).where(has_honeybadger: tracked)
+    end
+  end
   scope :documented, ->(documented) do
     if documented == 'true'
       where.not(documentation_url: nil)
