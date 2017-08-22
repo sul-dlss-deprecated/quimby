@@ -12,8 +12,8 @@
     <label class="mr-sm-2">Tested</label>
     <%= select_tag 'tested', options_for_select([true, false], selected: params[:tested]), include_blank: true, class: 'custom-select mr-sm-2' %>
 
-    <label class="mr-sm-2">Documented</label>
-    <%= select_tag 'documented', options_for_select([true, false], selected: params[:documented]), include_blank: true, class: 'custom-select mr-sm-2' %>
+    <label class="mr-sm-2">Tracked</label>
+    <%= select_tag 'tracked', options_for_select([true, false], selected: params[:tracked]), include_blank: true, class: 'custom-select mr-sm-2' %>
 
     <%= submit_tag 'Filter', class: 'btn btn-outline-primary btn-sm mr-sm-2', name: nil %>
     <%= link_to 'Reset', repositories_path, class: 'btn btn-outline-secondary btn-sm' %>

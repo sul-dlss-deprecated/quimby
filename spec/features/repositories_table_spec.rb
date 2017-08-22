@@ -23,7 +23,7 @@ describe 'Repositories index table', type: :feature do
     create(:repository_index)
     visit repositories_path
     find('#deployable').select('true')
-    find('#documented').select('false')
+    find('#tracked').select('true')
     find('#language').select('ruby')
     find('#monitorable').select('true')
     find('#tested').select('true')
@@ -42,7 +42,7 @@ describe 'Repositories index table', type: :feature do
   it 'filters from documented' do
     create(:repository_index)
     visit repositories_path
-    find('#documented').select('true')
+    find('#tracked').select('false')
     click_button 'Filter'
     expect(body).not_to have_link('Hello-World', href: '/repositories/Hello-World')
   end
