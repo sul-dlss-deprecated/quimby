@@ -1,7 +1,15 @@
 <%= render 'repo_navbar' %>
-<div class="container repo-table">
+<div class="container repo-table mt-2">
   <table class="table table-hover">
-    <thead>
+    <thead class="table-sm">
+      <tr>
+        <th class="no-border-top">Repo</th>
+        <th class="no-border-top">Language</th>
+        <th class="no-border-top">Deployable</th>
+        <th class="no-border-top">Monitorable</th>
+        <th class="no-border-top">Tested</th>
+        <th class="no-border-top">Tracked</th>
+      </tr>
     </thead>
     <tbody>
         <% @repositories.each do |r| %>
@@ -10,36 +18,53 @@
             <%= link_to r.name, repository_path(r.name), :target => "_blank" %>
             <%= link_to image_tag('github.svg', size: '14'), r.url, :target => "_blank" %>
           </td>
-          <td>
+          <td class="left-border">
             <% if r.language %>
-              <span class="badge badge-repos badge-default"><%= r.language.downcase %></span>
+              <span class="badge badge-repos"><%= r.language.downcase %></span>
             <% end %>
             <% if r.is_rails %>
-              <span class="badge badge-repos badge-default">rails</span>
+              <span class="badge badge-repos">rails</span>
             <% end %>
             <% if r.is_gem %>
-              <span class="badge badge-repos badge-default">gem</span>
+              <span class="badge badge-repos">gem</span>
             <% end %>
+          </td>
+          <td class="left-border">
             <% if r.has_capistrano %>
-              <span class="badge badge-repos badge-default">capistrano</span>
+              <span class="badge badge-repos">capistrano</span>
             <% end %>
-            <% if r.has_honeybadger %>
-              <span class="badge badge-repos badge-default">honeybadger</span>
+          </br>
+            <% unless r.unique_deploy_envs.empty? %>
+              <% r.unique_deploy_envs.each do |env| %>
+              <span class="badge badge-repos"><%= env %></span>
+              <% end %>
             <% end %>
+          </td>
+          <td class="left-border">
+            <% if r.has_okcomputer %>
+              <span class="badge badge-repos">okcomputer</span>
+            <% end %>
+            <% if r.has_is_it_working %>
+              <span class="badge badge-repos">is_it_working</span>
+            <% end %>
+          </td>
+          <td class="left-border">
             <% if r.has_travis %>
               <%= link_to image_tag("https://travis-ci.org/#{r.organization}/#{r.name}.svg?branch=master"), "https://travis-ci.org/#{r.organization}/#{r.name}", :target => "_blank" %>
             <% end %>
             <% if r.has_coveralls %>
               <%= link_to image_tag("https://coveralls.io/repos/github/#{r.organization}/#{r.name}/badge.svg?branch=master"), "https://coveralls.io/github/#{r.organization}/#{r.name}?branch=master", :target => "_blank" %>
             <% end %>
-            <% if r.has_okcomputer %>
-              <span class="badge badge-repos badge-default">okcomputer</span>
-            <% end %>
-            <% if r.has_is_it_working %>
-              <span class="badge badge-repos badge-default">is_it_working</span>
-            <% end %>
-            <% if !r.gemnasium_alerts.nil? %>
+          </td>
+          <td class="left-border">
+            <% unless r.gemnasium_alerts.nil? %>
               <%= link_to image_tag("https://img.shields.io/gemnasium/#{r.organization}/#{r.name}.svg"), "https://gemnasium.com/#{r.organization}/#{r.name}", :target => "_blank", :title => "#{r.gemnasium_alerts} alerts" %>
+              <% unless r.gemnasium_alerts.zero? %>
+                <span class="badge badge-repos">alerts: <%= r.gemnasium_alerts %></span>
+              <% end %>
+            <% end %>
+            <% if r.has_honeybadger %>
+              <span class="badge badge-repos badge-default">honeybadger</span>
             <% end %>
           </td>
         </tr>

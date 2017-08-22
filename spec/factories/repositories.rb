@@ -27,5 +27,12 @@ FactoryGirl.define do
     has_coveralls 'true'
     has_okcomputer 'true'
     has_is_it_working 'true'
+    gemnasium_alerts 3
+
+    factory :repo_index_with_servers do
+      after(:create) do |repo|
+        repo.deploy_environments << create(:dev_deploy_environment)
+      end
+    end
   end
 end
