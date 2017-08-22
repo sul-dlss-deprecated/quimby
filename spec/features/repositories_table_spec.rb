@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Repositories index table', type: :feature do
   it 'link for repo name to github' do
-    r = create(:repository_index)
+    r = create(:repo_index_with_servers)
     visit repositories_path
     expect(body).to have_link('Hello-World', href: '/repositories/Hello-World')
     expect(body).to have_css("img[src*='github']")
@@ -12,6 +12,7 @@ describe 'Repositories index table', type: :feature do
     expect(body).to have_text('rails')
     expect(body).to have_text('gem')
     expect(body).to have_text('capistrano')
+    expect(body).to have_text('dev')
     expect(body).to have_text('honeybadger')
     expect(body).to have_link(href: "https://travis-ci.org/#{r.organization}/#{r.name}")
     expect(body).to have_link(href: "https://coveralls.io/github/#{r.organization}/#{r.name}?branch=master")
