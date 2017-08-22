@@ -18,6 +18,8 @@ describe 'Repositories index table', type: :feature do
     expect(body).to have_link(href: "https://coveralls.io/github/#{r.organization}/#{r.name}?branch=master")
     expect(body).to have_text('okcomputer')
     expect(body).to have_text('is_it_working')
+    expect(body).to have_link(href: "https://gemnasium.com/#{r.organization}/#{r.name}")
+    expect(body).to have_text('alerts: 3')
   end
 
   it 'form sets valid params' do
