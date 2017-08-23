@@ -1,0 +1,7 @@
+[
+  {
+    "value": "stage",
+    "name": "network",
+    "certname": "some-server-stage.stanford.edu"
+  }
+]

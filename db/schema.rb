@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20170728202534) do
     t.string "ip"
     t.string "dev_team"
     t.boolean "pupgraded"
+    t.string "network"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

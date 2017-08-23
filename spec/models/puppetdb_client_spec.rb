@@ -49,4 +49,14 @@ RSpec.describe PuppetdbClient do
       end
     end
   end
+
+  describe '#network(fqdn)' do
+    before do
+      response = file_fixture('network_fact').read
+      stub_request(:any, /puppetdb.example.com/).to_return(status: 200, body: response, headers: { 'Content-Type' => 'application/json' })
+    end
+    it 'returns the network zone of a node' do
+      expect(client.network('some-server-stage.stanford.edu')).to eq 'stage'
+    end
+  end
 end
