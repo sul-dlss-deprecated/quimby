@@ -31,15 +31,15 @@ $ bundle install
 Create the database for the Quimby application, then migrate the schema (if needed).
 
 ```bash
-$ rake db:create
-$ rake db:migrate
+$ bundle exec rake db:create
+$ bundle exec rake db:migrate
 ```
 
 Now, you want to load your data. You need to add configuration information to `config/settings.yml` (see **Configuration** below for what is required), then run the rake task to load all data.
 
 ```bash
 # after editing config/settings.yml
-$ rake load_data:all
+$ bundle exec rake load_data:all
 ```
 
 This will load data from the Quimby data sources into the application database.
@@ -47,7 +47,7 @@ This will load data from the Quimby data sources into the application database.
 Finally, start the local development server:
 
 ```bash
-$ rails s
+$ bundle exec rails s
 ```
 
 ### Configuration
@@ -64,12 +64,16 @@ For each data source, you are required to have some configuration for access (ca
 Quimby uses rspec for managing tests and factory girl for generating some of our fixtures class instances. To run tests:
 
 ```bash
-$ rspec
+$ bundle exec rake
 ```
 
 ## Deployment
 
-To be written up.
+Quimby uses capistrano to deploy. Current it's deployed to a staging machine named `sul-quimby-stage` and deployed via:
+
+```bash
+$ bundle exec cap stage deploy
+```
 
 ## Data Sources
 
