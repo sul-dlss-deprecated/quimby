@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'repositories#index'
+  root to: 'dashboard#index'
   resources :repositories, only: [:show, :index] do
     collection do
       get 'by_org'
