@@ -28,7 +28,7 @@ class GemnasiumClient
 
       fetch_api("#{api}/projects/#{slug}/dependencies").each do |gem|
         next unless gem['package']['type'] == 'Rubygem'
-        dep = { name: gem['package']['name'], version: gem['locked'] }
+        dep = { 'name' => gem['package']['name'], 'version' => gem['locked'] }
         gems[slug].push(dep)
       end
     end

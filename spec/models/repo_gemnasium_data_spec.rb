@@ -45,6 +45,8 @@ RSpec.describe RepoGemnasiumData do
       repo_gemnasium_data.load_data
       repo.reload
       expect(repo.dependencies.count).to eq 2
+      expect(repo.dependencies.first.name).to eq 'lyberteam-devel'
+      expect(repo.dependencies.second.name).to eq 'mediashelf-loggable'
     end
 
     it 'sets gemnasium count on matching repos without alerts' do
