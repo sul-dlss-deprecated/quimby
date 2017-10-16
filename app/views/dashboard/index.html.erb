@@ -1,0 +1,108 @@
+<div class="container mt-5">
+  <div class="row mb-3">
+    <div class="col-sm-4">
+      <div class="card card-inverse text-center" style="background-color: #2F4858;">
+        <div class="card-block">
+          <h4 class="card-title">Servers</h4>
+          <h1 class="card-text"><%= Server.count %></h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card card-inverse text-center" style="background-color: #F6AE2D;">
+        <div class="card-block">
+          <h4 class="card-title">Pupgraded Servers</h4>
+          <h1 class="card-text"><%= (Server.where(pupgraded: true).count / Server.count.to_f * 100).round(0) %>%</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card card-inverse text-center" style="background-color: #33658A;">
+        <div class="card-block">
+          <h4 class="card-title">Deployed Servers</h4>
+          <h1 class="card-text"><%= Repository.left_outer_joins(:servers).where.not('deploy_environments.name': nil).count %></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3 mx-auto">
+    <div class="col-sm-6">
+      <div class="card card-inverse text-center" style="background-color: #F26419;">
+        <div class="card-block">
+          <h4 class="card-title">Codebases</h4>
+          <h1 class="card-text"><%= Repository.count %></h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card card-inverse text-center" style="background-color: #86BBD8;">
+        <div class="card-block">
+          <h4 class="card-title">Deployable Code</h4>
+          <h1 class="card-text"><%= Repository.deployable.count %></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-sm-4">
+      <div class="card card-inverse text-center" style="background-color: #2F4858;">
+        <div class="card-block">
+          <h4 class="card-title">Monitorable Code</h4>
+          <h1 class="card-text"><%= Repository.deployable.monitorable('true').count %></h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card card-inverse text-center" style="background-color: #33658A;">
+        <div class="card-block">
+          <h4 class="card-title">Tested Code</h4>
+          <h1 class="card-text"><%= Repository.deployable.tested('true').count %></h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card card-inverse text-center" style="background-color: #F6AE2D;">
+        <div class="card-block">
+          <h4 class="card-title">Tracked Codebases</h4>
+          <h1 class="card-text"><%= Repository.deployable.tracked('true').count %></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">Codebases by org</h4>
+          <%= bar_chart by_org_repositories_path %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">Top 5 languages</h4>
+          <%= column_chart by_top_5_lang_repositories_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">DLSS</h4>
+          <%= pie_chart by_lang_dlss_repositories_path, library: { legend: { position: 'bottom', labels: { padding: 5, boxWidth: 5 }}} %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">CIDR</h4>
+          <%= pie_chart by_lang_cidr_repositories_path, library: { legend: { position: 'bottom', labels: { padding: 5, boxWidth: 5 }}} %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
