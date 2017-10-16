@@ -17,8 +17,10 @@ RSpec.describe ServerPuppetdbData do
       before do
         hostname_facts = file_fixture('hostname_facts').read
         ipaddress_facts = file_fixture('ipaddress_facts').read
+        network_fact = file_fixture('network_fact').read
         stub_request(:any, /puppetdb.example.com/).to_return(status: 200, body: hostname_facts, headers: { 'Content-Type' => 'application/json' }).then
-                                                  .to_return(status: 200, body: ipaddress_facts, headers: { 'Content-Type' => 'application/json' })
+                                                  .to_return(status: 200, body: ipaddress_facts, headers: { 'Content-Type' => 'application/json' }).then
+                                                  .to_return(status: 200, body: network_fact, headers: { 'Content-Type' => 'application/json' })
       end
 
       it 'creates objects from api response' do
@@ -28,6 +30,7 @@ RSpec.describe ServerPuppetdbData do
         expect(server.hostname).to eq 'some-server-stage'
         expect(server.ip).to eq '123.45.67.890'
         expect(server.pupgraded).to be true
+        expect(server.network).to eq 'stage'
       end
 
       it 'only creates unique objects' do

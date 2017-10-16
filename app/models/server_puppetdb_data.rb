@@ -16,8 +16,10 @@ class ServerPuppetdbData
       ip = client.ipaddress(fqdn)
       hostname = fqdn.split('.').first
       pupgraded = client.pupgraded?(fqdn)
+      network = client.network(fqdn)
       Server.find_or_create_by(fqdn: fqdn).tap do |server|
-        server.update(ip: ip, hostname: hostname, pupgraded: pupgraded)
+        server.update(ip: ip, hostname: hostname,
+                      pupgraded: pupgraded, network: network)
       end
     end
   end

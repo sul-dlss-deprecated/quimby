@@ -34,4 +34,9 @@ class PuppetdbClient
   def pupgraded?(fqdn)
     pupgraded_fqdns.include?(fqdn) ? true : false
   end
+
+  def network(fqdn)
+    response = client.request('facts', ['and', ['=', 'certname', fqdn], ['=', 'name', 'network']])
+    response.data.first['value']
+  end
 end

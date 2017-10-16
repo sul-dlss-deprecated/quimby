@@ -20,6 +20,9 @@
             <% if s.pupgraded %>
               <span class="badge badge-repos badge-default">pupgraded</span>
             <% end %>
+            <% if s.network %>
+              <span class="badge badge-repos badge-default"><%= s.network %></span>
+            <% end %>
           </td>
         </tr>
         <% end %>
