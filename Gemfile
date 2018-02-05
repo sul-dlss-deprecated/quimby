@@ -9,7 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 # Use postgres as the database for Active Record
-gem 'pg'
+gem 'pg', '< 1'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -35,7 +35,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'config'
 gem 'github_api'
-gem 'bootstrap'
+gem 'bootstrap', '4.0.0.alpha6'
 gem 'jquery-rails'
 gem 'friendly_id'
 gem 'whenever'
